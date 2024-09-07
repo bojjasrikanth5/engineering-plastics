@@ -1,0 +1,277 @@
+{{> head}}
+{{> navbar}}
+{{#post}}
+   <main class="h-overflow">
+      <div class="content">
+         <article>
+            {{#featuredImage}}
+               {{#if url}}
+                  <figure class="content__hero-image">
+                     <img
+                        src="{{url}}"
+                        {{#if @config.site.responsiveImages}}                           
+                           {{responsiveImageAttributes 'featuredImage' srcset.post sizes.post}}
+                        {{/if}}
+                        {{ lazyload "eager" }}
+                        height="{{height}}"
+                        width="{{width}}"
+                        alt="{{alt}}">
+                     {{#checkIfAny caption credits}}
+                        <figcaption>
+                           {{caption}}
+                           {{credits}}
+                        </figcaption>
+                     {{/checkIfAny}}
+                  </figure>                 
+               {{/if}}
+            {{/featuredImage}}
+             
+            <header class="content__header content__header--down">
+               <div class="wrapper">
+                  {{#if @config.post.displayCategoryName}}
+                     {{#if mainTag}}
+                        <div class="c-card__meta content__meta">
+                           <a href="{{mainTag.url}}" class="c-card__meta invert">{{mainTag.name}}</a>
+                        </div>
+                     {{/if}}
+                  {{/if}}
+                  <h1 class="h-h1 content__title">{{title}}</h1>
+                  {{#checkIfAny @config.post.displayAuthor @config.post.displayDate}}
+                     <div class="c-card__meta content__meta">
+                        {{#if @config.post.displayAuthor}}
+                           {{#author}}
+                              <a href="{{url}}" class="invert" rel="author">
+                                 {{name}}
+                              </a>
+                           {{/author}}
+                        {{/if}}
+                        {{#if @config.post.displayDate}}
+                           <time datetime="{{date createdAt 'YYYY-MM-DDTHH:mm'}}" class="content__meta-date">
+                              {{#checkIf @config.custom.formatDate '!=' 'custom'}}
+                                 {{date createdAt @config.custom.formatDate}}
+                              {{else}}
+                                 {{date createdAt @config.custom.formatDateCustom}}
+                              {{/checkIf}}
+                           </time>
+                        {{/if}}
+                     </div>
+                  {{/checkIfAny}}
+               </div>
+            </header>         
+
+            <div class="wrapper content__entry">
+               {{{text}}}
+            </div>
+
+            {{#checkIfAny @config.post.displayUpdatedDate @config.post.displayShareButtons @config.post.displayTags  @config.post.displayAuthorBio @config.post.displayComments}}
+
+               <footer class="wrapper content__footer">
+                  {{#checkIfAny @config.post.displayUpdatedDate @config.post.displayShareButtons}}
+                     <div class="content__updated-share">
+                        {{#if @config.post.displayUpdatedDate}}
+                           <div class="content__updated">{{ translate 'post.updated' }}
+                              <time datetime="{{date modifiedAt 'YYYY-MM-DDTHH:mm'}}">
+                                 {{#checkIf @config.custom.formatDate '!=' 'custom'}}
+                                    {{date modifiedAt @config.custom.formatDate}}
+                                 {{else}}
+                                    {{date modifiedAt @config.custom.formatDateCustom}}
+                                 {{/checkIf}}
+                              </time>
+                           </div>
+                        {{/if}}
+
+                        {{#if @config.post.displayShareButtons}}
+                           {{#checkIfAll @plugins.socialSharing @plugins.socialSharing.state}}
+                              <div class="content__share">
+                                 <button
+                                    class="content__share-button js-content__share-button"
+                                    aria-label="{{ translate 'partials.shareButtons.shareWith' }}">
+                                    <svg width="32" height="32">
+                                       <use xlink:href="{{@website.assetsUrl}}/svg/svg-map.svg#share"></use>
+                                    </svg>
+                                 </button>
+                                 <div class="content__share-popup js-content__share-popup">
+                                    {{{@customSocialSharing}}}
+                                 </div>
+                              </div>
+                           {{else}}
+                              <div class="content__share">
+                                 <button
+                                    class="content__share-button js-content__share-button"
+                                    aria-label="{{ translate 'partials.shareButtons.shareWith' }}">
+                                    <svg width="32" height="32">
+                                       <use xlink:href="{{@website.assetsUrl}}/svg/svg-map.svg#share"></use>
+                                    </svg>
+                                 </button>
+                                 <div class="content__share-popup js-content__share-popup">
+                                    {{> share-buttons}}
+                                 </div>
+                              </div>
+                           {{/checkIfAll}}          
+                        {{/if}}
+                     </div>
+                  {{/checkIfAny}}
+
+                  {{#if @config.post.displayTags}}
+                    {{#if tags}}
+                     <div class="content__tag">
+                        <h3 class="content__footer-title">{{ translate 'post.taggedIn' }}</h3>                        
+                           <ul class="content__tag-inner">
+                              {{#each tags}}
+                                 <li>
+                                    <a href="{{url}}" class="invert" title="{{name}}">
+                                       {{name}}
+                                    </a>
+                                 </li>
+                              {{/each}}
+                           </ul>                       
+                     </div>
+                    {{/if}}
+                  {{/if}}
+
+                  {{#if @config.post.displayAuthorBio}}
+                     <div class="content__author">
+                        {{#author}}
+                           {{#if avatar}}
+                              <img src="{{avatar}}" {{ lazyload "lazy" }} alt="{{name}}">
+                           {{/if}}
+                           <div>
+                              <h3>
+                                 <a href="{{url}}" rel="author">
+                                    {{name}}
+                                 </a>
+                              </h3>
+                              {{{description}}}
+                           </div>
+                        {{/author}}
+                     </div>
+                  {{/if}}
+
+                  {{#if @config.post.displayComments}}
+                     <div class="content__comments">
+                        {{#checkIf @config.custom.commentOnClick '==' "click" }}
+                           <button class="content__comments-button" id="js-comments">{{ translate 'post.loadComments' }}</button>
+                           <div class="content__comments-inner is-hidden" id="js-comments__inner">
+                              {{{@commentsCustomCode}}}
+                           </div>
+                        {{else}}
+                           <div class="content__comments-inner">
+                              {{{@commentsCustomCode}}}
+                           </div>
+                        {{/checkIf}}
+                     </div>
+                  {{/if}}
+
+               </footer>
+            {{/checkIfAny}}
+         </article>
+      </div>
+
+      {{#if @config.post.displayPostNavigation}}
+         {{#checkIfAny ../previousPost ../nextPost}}
+            <nav class="content__nav">
+               <div class="wrapper content__nav-inner">
+                  {{#../previousPost}}
+                     <div class="content__nav-prev">
+                        <svg width="1.041em" height="0.416em" aria-hidden="true">
+                           <use xlink:href="{{@website.assetsUrl}}/svg/svg-map.svg#arrow-prev"/>
+                        </svg>
+                        <a href="{{url}}" rel="prev" class="content__nav-link">
+                           <span>{{ translate 'post.previousPost' }}</span>
+                           {{title}}
+                        </a>
+                     </div>
+                  {{/../previousPost}}
+                  {{#../nextPost}}
+                     <div class="content__nav-next">
+                        <a href="{{url}}" rel="next" class="content__nav-link">
+                           <span>{{ translate 'post.nextPost' }}</span>
+                           {{title}}
+                        </a>
+                        <svg width="1.041em" height="0.416em" aria-hidden="true">
+                           <use xlink:href="{{@website.assetsUrl}}/svg/svg-map.svg#arrow-next"/>
+                        </svg>
+                     </div>
+                  {{/../nextPost}}
+               </div>
+            </nav>
+         {{/checkIfAny}}
+      {{/if}}
+
+      {{#if @config.post.displayRelatedPosts}}
+         {{#if ../relatedPosts}}
+            <div class="section section--light content__related">
+               <div class="wrapper">
+                  <h3 class="h6">
+                     {{ translate 'post.relatedPosts' }}
+                  </h3>
+                  <div class="l-cols">
+                     {{#each ../relatedPosts}}
+                        <article class="c-card {{#if @config.custom.feedImage}}c-card--horizontal{{/if}}">
+                           {{#if @config.custom.feedImage}}
+                              {{#featuredImage}}
+                                 {{#if url}}
+                                    <a href="{{../url}}" class="c-card__image">
+                                       <img
+                                          src="{{url}}"
+                                          {{#if @config.site.responsiveImages}}                           
+                                             {{responsiveImageAttributes 'featuredImage' srcset.listing sizes.listing}}
+                                          {{/if}}
+                                          {{ lazyload "lazy" }}
+                                          height="{{height}}"
+                                          width="{{width}}"
+                                          alt="{{alt}}">
+                                    </a>                                  
+                                 {{/if}}
+                              {{/featuredImage}}
+                           {{/if}}
+                           <div class="c-card__body">
+                              <header>
+                                 {{#checkIfAny @config.custom.feedAuthor @config.custom.feedDate}}
+                                    <div class="c-card__meta">
+                                       {{#if @config.custom.feedAuthor}}
+                                          {{#author}}
+                                             <a href="{{url}}" rel="author">{{name}}</a>
+                                          {{/author}}
+                                       {{/if}}
+                                       {{#if @config.custom.feedDate}}
+                                          <time datetime="{{date createdAt 'YYYY-MM-DDTHH:mm'}}">
+                                             {{#checkIf @config.custom.formatDate '!=' 'custom'}}
+                                                {{date createdAt @config.custom.formatDate}}
+                                             {{else}}
+                                                {{date createdAt @config.custom.formatDateCustom}}
+                                             {{/checkIf}}
+                                          </time>
+                                       {{/if}}
+                                    </div>
+                                 {{/checkIfAny}}
+
+                                 {{#if @config.custom.feedTitle}}
+                                    <h2 class="c-card__title">
+                                       <a href="{{url}}">{{title}}</a>
+                                    </h2>
+                                 {{/if}}
+                              </header>
+                              {{#checkIfAny @config.custom.feedText @config.custom.feedReadMore}}                         
+                                  <div class="c-card__excerpt">
+                                     {{#if @config.custom.feedText}}
+                                        <p>{{{excerpt}}}</p>
+                                     {{/if}}
+                                     {{#if @config.custom.feedReadMore}}
+                                        <a href="{{url}}" class="btn c-card__btn">
+                                           {{ translate 'common.readMore' }}</a>
+                                     {{/if}}
+                                  </div>
+                           {{/checkIfAny}}
+                           </div>
+                        </article>
+                     {{/each}}
+                  </div>
+               </div>
+            </div>
+         {{/if}}
+      {{/if}}
+   </main>
+{{/post}}
+{{> newsletter}}
+{{> footer}}

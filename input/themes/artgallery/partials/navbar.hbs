@@ -1,0 +1,62 @@
+<header class="header" id="js-header">
+   <div class="header__inner{{#checkIf @config.custom.navbarWidth '==' "wide" }} header__inner--wide{{/checkIf}}">
+       
+      <div class="logo">
+         <a href="{{@website.url}}" class="logo__link">
+            {{#if @website.logo}}
+               <img src="{{@website.logo}}" alt="{{@website.name}}" width="{{@website.logoSize.width}}" height="{{@website.logoSize.height}}">
+            {{else}}
+               {{@website.name}}
+            {{/if}}
+         </a>
+      </div>
+
+      {{#if menus.mainMenu}}
+         <nav class="navbar js-navbar">
+            <button class="navbar__toggle js-toggle" aria-label="{{ translate 'partials.menu.label' }}">
+               <span class="navbar__toggle-box">
+                  <span class="navbar__toggle-inner">{{ translate 'partials.menu.label' }}</span>
+               </span>
+            </button>
+            {{> menu menus.mainMenu}}
+         </nav>
+      {{/if}}
+
+      {{#if @config.custom.searchFeature}}
+         <div class="search">
+            <div class="search__overlay js-search-overlay">
+               <div class="wrapper search__overlay-inner">
+                  {{{@customSearchInput}}} 
+                  <button
+                     class="search__close js-search-close"
+                     aria-label="{{ translate 'search.close' }}">{{ translate 'search.close' }}</button>
+               </div>
+            </div>
+            <button
+               class="search__btn js-search-btn"
+               aria-label="{{ translate 'search.title' }}">
+               <svg role="presentation" focusable="false" height="18" width="18">
+                  <use xlink:href="{{@website.assetsUrl}}/svg/svg-map.svg#search"/>
+               </svg>
+            </button>
+         </div>
+      {{/if}}
+
+      {{#if @config.custom.topButton}}
+         <div class="buttons">
+            {{#checkIf @config.custom.topButtonSource '==' "post" }}
+               {{#getPost @config.custom.topButtonPostIndicator}}
+                  <a href="{{url}}" class="btn">{{@config.custom.topButtonName}}</a>
+               {{/getPost}}
+            {{else}}
+               <a
+                  href="{{@config.custom.topButtonUrl}}"
+                  class="btn"
+                  target="_blank"
+                  rel="noreferrer nofollow">{{@config.custom.topButtonName}}</a>
+            {{/checkIf}}
+         </div>
+      {{/if}}
+
+   </div>
+</header>

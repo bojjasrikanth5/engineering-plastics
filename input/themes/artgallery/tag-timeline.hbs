@@ -1,0 +1,63 @@
+{{> head}}
+{{> navbar}}
+<main class="h-overflow tag">
+   {{#tag}}
+      <div class="page section section--1">
+         <div class="wrapper page__header page__header--center">
+            <h1>
+               {{name}}
+               {{#if tagViewConfig.displayPostCounter}}<sup>({{postsNumber}})</sup>{{/if}}
+            </h1>
+            {{#if tagViewConfig.displayDescription}}
+               {{{description}}}
+            {{/if}}
+         </div>
+      </div>
+      {{#if tagViewConfig.displayPostList}} 
+         <div class="section">
+            <div class="wrapper">
+               <div class="timeline">
+                  {{#each ../posts}}
+                     <div class="timeline__item">
+                        <div class="timeline__date">
+                           <time datetime="{{date createdAt 'YYYY-MM-DDTHH:mm'}}" class="h-h1">
+                              {{#checkIf @config.custom.formatDate '!=' 'custom'}}
+                                 {{date createdAt @config.custom.formatDate}}
+                              {{else}}
+                                 {{date createdAt @config.custom.formatDateCustom}}
+                              {{/checkIf}}
+                           </time>
+                        </div>
+                        <div class="timeline__content">
+                           {{#featuredImage}}
+                              {{#if url}}
+                                 <a href="{{../url}}" class="c-card__image">
+                                    <img
+                                       src="{{url}}"
+                                       {{#if @config.site.responsiveImages}}                           
+                                          {{responsiveImageAttributes 'featuredImage' srcset.listing sizes.listing}}
+                                       {{/if}}
+                                       {{ lazyload "lazy" }}
+                                       height="{{height}}"
+                                       width="{{width}}"
+                                       alt="{{alt}}">
+                                 </a>
+                              {{/if}}
+                           {{/featuredImage}}
+                           <h2 class="h3">
+                              <a href="{{url}}">{{title}}</a></h2>
+                           <p>{{{excerpt}}}</p>
+                        </div>                  
+                     </div>
+                  {{/each}}
+               </div>
+               {{#if @config.custom.pagination}}
+                  {{> pagination}}
+               {{/if}}
+            </div>
+         </div>
+      {{/if}}
+   {{/tag}}
+</main>
+{{> newsletter}}
+{{> footer}}

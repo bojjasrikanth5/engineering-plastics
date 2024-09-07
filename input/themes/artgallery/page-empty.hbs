@@ -1,0 +1,58 @@
+
+{{> head}}
+{{> navbar}}
+{{#page}}
+   <main class="h-overflow">
+      <div class="content">
+         <div>
+            <div class="content__header content__header--default section section--1">
+               <div class="wrapper">
+                  <h1 class="h-h1 content__title">{{title}}</h1>
+               </div>
+            </div>
+
+            {{#featuredImage}}
+               {{#if url}}
+                  <figure class="content__hero-image">
+                     <img
+                        src="{{url}}"
+                        {{#if @config.site.responsiveImages}}                           
+                           {{responsiveImageAttributes 'featuredImage' srcset.post sizes.post}}
+                        {{/if}}
+                        {{ lazyload "eager" }}
+                        height="{{height}}"
+                        width="{{width}}"
+                        alt="{{alt}}">
+                     {{#checkIfAny caption credits}}
+                        <figcaption>
+                           {{caption}}
+                           {{credits}}
+                        </figcaption>
+                     {{/checkIfAny}}
+                  </figure>                 
+               {{/if}}
+            {{/featuredImage}}
+
+            <div class="wrapper content__entry content__entry--fullwidth">            
+               {{{text}}}
+            </div>
+
+            {{#if @config.page.displayChildPages}}
+               {{#if subpages}}
+                  <div class="wrapper content__entry content__entry--fullwidth">
+                     <div class="subpages">
+                        <h2 class="h6 subpages__title">{{ translate 'page.childPages' }}</h2>
+                        <ul class="subpages__list">
+                           {{> subpages-list}}
+                        </ul>
+                     </div>
+                  </div>
+               {{/if}}
+            {{/if}}
+         </div>
+      </div>
+
+   </main>
+{{/page}}
+{{> newsletter}}
+{{> footer}}

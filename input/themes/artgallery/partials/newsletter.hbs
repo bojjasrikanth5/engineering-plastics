@@ -1,0 +1,16 @@
+{{#if @config.custom.frontNewsletter}}
+   <div class="section section--3 newsletter">
+      <div class="wrapper newsletter__wrapper">
+         <div class="section__header">
+            <h2 class="section__title">{{ translate 'partials.newsletter.subscribe' }}</h2>
+            <p>{{ translate 'partials.newsletter.stayConnected' }}</p>
+         </div>
+         <div class="newsletter__box">
+            <div>{{ translate 'partials.newsletter.subscribeTo' }}</div>
+            <div class="newsletter__form">
+               {{{@config.custom.frontNewsletterFormCode}}}
+            </div>
+         </div>
+      </div>
+   </div>
+{{/if}}

@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://astonishing-genie-c3a360.netlify.app/sitemap.xml

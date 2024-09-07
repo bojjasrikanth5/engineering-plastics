@@ -1,0 +1,143 @@
+{{#getPost @config.custom.frontPost}}
+   <main class="h-overflow">
+      <div class="content">
+         <article>
+            <header class="content__header content__header--default section section--1">
+               <div class="wrapper">
+
+                  {{#if postViewConfig.displayCategoryName}}
+                     {{#if mainTag}}
+                        <div class="c-card__meta content__meta">
+                           <a href="{{mainTag.url}}" class="c-card__meta">{{mainTag.name}}</a>
+                        </div>
+                     {{/if}}
+                  {{/if}}
+
+                  <h1 class="h-h1 content__title">{{title}}</h1>
+
+                  {{#checkIfAny postViewConfig.displayAuthor postViewConfig.displayDate}}
+                     <div class="c-card__meta content__meta">
+
+                        {{#if postViewConfig.displayAuthor}}
+                           {{#author}}
+                              <a href="{{url}}" class="invert" rel="author">
+                                 {{name}}
+                              </a>
+                           {{/author}}
+                        {{/if}}
+
+                        {{#if postViewConfig.displayDate}}
+                           <time datetime="{{date createdAt 'YYYY-MM-DDTHH:mm'}}" class="content__meta-date">
+                              {{#checkIf @config.custom.formatDate '!=' 'custom'}}
+                                 {{date createdAt @config.custom.formatDate}}
+                              {{else}}
+                                 {{date createdAt @config.custom.formatDateCustom}}
+                              {{/checkIf}}
+                           </time>
+                        {{/if}}
+                     </div>
+                  {{/checkIfAny}}
+
+               </div>
+            </header>
+
+            {{#featuredImage}}
+               {{#if url}}
+                  <figure class="content__hero-image">
+                     <img
+                        src="{{url}}"
+                        {{#if @config.site.responsiveImages}}                           
+                           {{responsiveImageAttributes 'featuredImage' srcset.post sizes.post}}
+                        {{/if}}
+                        {{ lazyload "eager" }}
+                        height="{{height}}"
+                        width="{{width}}"
+                        alt="{{alt}}">
+                     {{#checkIfAny caption credits}}
+                        <figcaption>
+                           {{caption}}
+                           {{credits}}
+                        </figcaption>
+                     {{/checkIfAny}}
+                  </figure>                 
+               {{/if}}
+            {{/featuredImage}}
+
+            <div class="wrapper content__entry">
+               {{{text}}}
+            </div>
+
+            {{#checkIfAny postViewConfig.displayUpdatedDate postViewConfig.displayTags  postViewConfig.displayAuthorBio postViewConfig.displayComments}}
+
+               <footer class="wrapper content__footer">
+                  {{#if postViewConfig.displayUpdatedDate}}
+                     <div class="content__updated-share">
+                        <div class="content__updated">{{ translate 'post.updated' }}
+                           <time datetime="{{date modifiedAt 'YYYY-MM-DDTHH:mm'}}">
+                              {{#checkIf @config.custom.formatDate '!=' 'custom'}}
+                                 {{date modifiedAt @config.custom.formatDate}}
+                              {{else}}
+                                 {{date modifiedAt @config.custom.formatDateCustom}}
+                              {{/checkIf}}
+                           </time>
+                        </div>
+                     </div>
+                  {{/if}}
+
+                  {{#if postViewConfig.displayTags}}
+                     <div class="content__tag">
+                        <h3 class="content__footer-title">Tagged in:</h3>
+                        {{#if tags}}
+                           <ul class="content__tag-inner">
+                              {{#each tags}}
+                                 <li>
+                                    <a href="{{url}}" class="invert" title="{{name}}">
+                                       {{name}}
+                                    </a>
+                                 </li>
+                              {{/each}}
+                           </ul>
+                        {{/if}}
+                     </div>
+                  {{/if}}
+
+                  {{#if postViewConfig.displayAuthorBio}}
+                     <div class="content__author">
+                        {{#author}}
+                           {{#if avatar}}
+                              <img src="{{avatar}}" {{ lazyload "lazy" }} alt="{{name}}">
+                           {{/if}}
+                           <div>
+                              <h3>
+                                 <a href="{{url}}" rel="author">
+                                    {{name}}
+                                 </a>
+                              </h3>
+                              {{{description}}}
+                           </div>
+                        {{/author}}
+                     </div>
+                  {{/if}}
+                
+
+                  {{#if postViewConfig.displayComments}}
+                     <div class="content__comments">
+                        {{#checkIf @config.custom.commentOnClick '==' "click" }}
+                           <button class="content__comments-button" id="js-comments">{{ translate 'post.loadComments' }}</button>
+                           <div class="content__comments-inner is-hidden" id="js-comments__inner">
+                              {{{@commentsCustomCode}}}
+                           </div>
+                        {{else}}
+                           <div class="content__comments-inner">
+                              {{{@commentsCustomCode}}}
+                           </div>
+                        {{/checkIf}}
+                     </div>
+                  {{/if}}
+
+               </footer>
+            {{/checkIfAny}}
+         </article>
+      </div>
+   </main>
+{{/getPost}}

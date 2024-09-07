@@ -1,0 +1,94 @@
+{{> head}}
+{{> navbar}}
+<main class="h-overflow tag">
+   {{#tag}}
+      <div class="page section section--1">
+         <div class="wrapper page__header">
+            <h1>
+               {{name}}
+               {{#if tagViewConfig.displayPostCounter}}<sup>({{postsNumber}})</sup>{{/if}}
+            </h1>
+            {{#if tagViewConfig.displayDescription}}
+               {{{description}}}
+            {{/if}}
+         </div>
+      </div>
+      {{#if tagViewConfig.displayPostList}} 
+         <div class="section">
+            <div class="wrapper">
+               <div class="l-listing 
+                  {{#checkIf @config.custom.pagelatestLayout '==' "grid" }}
+                     l-grid l-grid--{{@config.custom.pagelatestColumns}}
+                  {{else}}
+                     l-masonry l-masonry--{{@config.custom.pagelatestColumns}}
+                  {{/checkIf}}">
+                  {{#each ../posts}}
+                     <article class="c-card">
+                        {{#if @config.custom.feedImage}}
+                           {{#featuredImage}}
+                              {{#if url}}
+                                 <a href="{{../url}}" class="c-card__image">
+                                    <img
+                                       src="{{url}}"
+                                       {{#if @config.site.responsiveImages}}                           
+                                          {{responsiveImageAttributes 'featuredImage' srcset.listing sizes.listing}}
+                                       {{/if}}
+                                       {{ lazyload "lazy" }}
+                                       height="{{height}}"
+                                       width="{{width}}"
+                                       alt="{{alt}}"> 
+                                 </a>
+                              {{/if}}
+                           {{/featuredImage}}
+                        {{/if}}
+                        {{#checkIfAny @config.custom.feedAuthor @config.custom.feedDate @config.custom.feedTitle @config.custom.feedReadMore}}
+                           <div class="c-card__body">
+                              {{#checkIfAny @config.custom.feedAuthor @config.custom.feedDate @config.custom.feedTitle}}
+                                 <header>
+                                    {{#checkIfAny @config.custom.feedAuthor @config.custom.feedDate}}
+                                       <div class="c-card__meta">
+                                          {{#if @config.custom.feedAuthor}}
+                                             {{#author}}
+                                                <a href="{{url}}" rel="author" class="invert">{{name}}</a>
+                                             {{/author}}
+                                          {{/if}}
+                                          {{#if @config.custom.feedDate}}
+                                             <time datetime="{{date createdAt 'YYYY-MM-DDTHH:mm'}}">
+                                                {{#checkIf @config.custom.formatDate '!=' 'custom'}}
+                                                   {{date createdAt @config.custom.formatDate}}
+                                                {{else}}
+                                                   {{date createdAt @config.custom.formatDateCustom}}
+                                                {{/checkIf}}
+                                             </time>
+                                          {{/if}}
+                                       </div>
+                                    {{/checkIfAny}}
+                                    {{#if @config.custom.feedTitle}}
+                                       <h3 class="h6 c-card__title">
+                                          <a href="{{url}}">{{title}}</a>
+                                       </h3>
+                                    {{/if}}
+                                 </header>
+                              {{/checkIfAny}}
+
+                              {{#if @config.custom.feedReadMore}}
+                                 <div class="c-card__excerpt">
+                                    <a href="{{url}}" class="btn btn--clean c-card__btn">
+                                       <span>{{ translate 'common.readMore' }}</span></a>
+                                 </div>
+                              {{/if}}
+                           </div>
+                        {{/checkIfAny}}
+                     </article>
+                  {{/each}}
+               </div>
+               {{#if @config.custom.pagination}}
+                  {{> pagination}}
+               {{/if}}
+            </div>
+         </div>
+      {{/if}}
+   {{/tag}}
+</main>
+{{> newsletter}}
+{{> footer}}

@@ -1,0 +1,162 @@
+{{> head}}
+{{> navbar}}
+{{#page}}
+   <main class="h-overflow">
+      <div class="content">
+         <article>
+            {{#featuredImage}}
+               {{#if url}}
+                  <figure class="content__hero-image">
+                     <img
+                        src="{{url}}"
+                        {{#if @config.site.responsiveImages}}                           
+                           {{responsiveImageAttributes 'featuredImage' srcset.post sizes.post}}
+                        {{/if}}
+                        {{ lazyload "eager" }}
+                        height="{{height}}"
+                        width="{{width}}"
+                        alt="{{alt}}">
+                     {{#checkIfAny caption credits}}
+                        <figcaption>
+                           {{caption}}
+                           {{credits}}
+                        </figcaption>
+                     {{/checkIfAny}}
+                  </figure>                 
+               {{/if}}
+            {{/featuredImage}}
+             
+            <header class="content__header content__header--down">
+               <div class="wrapper">
+                  <h1 class="h-h1 content__title">{{title}}</h1>
+                  {{#checkIfAny @config.page.displayAuthor @config.page.displayDate}}
+                     <div class="c-card__meta content__meta">
+                        {{#if @config.page.displayAuthor}}
+                           {{#author}}
+                              <a href="{{url}}" class="invert" rel="author">
+                                 {{name}}
+                              </a>
+                           {{/author}}
+                        {{/if}}
+                        {{#if @config.page.displayDate}}
+                           <time datetime="{{date createdAt 'YYYY-MM-DDTHH:mm'}}" class="content__meta-date">
+                              {{#checkIf @config.custom.formatDate '!=' 'custom'}}
+                                 {{date createdAt @config.custom.formatDate}}
+                              {{else}}
+                                 {{date createdAt @config.custom.formatDateCustom}}
+                              {{/checkIf}}
+                           </time>
+                        {{/if}}
+                     </div>
+                  {{/checkIfAny}}
+               </div>
+            </header>         
+
+            <div class="wrapper content__entry">
+               {{{text}}}
+            </div>
+
+            {{#checkIfAny @config.page.displayUpdatedDate @config.page.displayShareButtons @config.page.displayAuthorBio @config.page.displayComments}}
+
+               <footer class="wrapper content__footer">
+                  {{#checkIfAny @config.page.displayUpdatedDate @config.page.displayShareButtons}}
+                     <div class="content__updated-share">
+                        {{#if @config.page.displayUpdatedDate}}
+                           <div class="content__updated">{{ translate 'post.updated' }}
+                              <time datetime="{{date modifiedAt 'YYYY-MM-DDTHH:mm'}}">
+                                 {{#checkIf @config.custom.formatDate '!=' 'custom'}}
+                                    {{date modifiedAt @config.custom.formatDate}}
+                                 {{else}}
+                                    {{date modifiedAt @config.custom.formatDateCustom}}
+                                 {{/checkIf}}
+                              </time>
+                           </div>
+                        {{/if}}
+
+                        {{#if @config.page.displayShareButtons}}
+                           {{#checkIfAll @plugins.socialSharing @plugins.socialSharing.state}}
+                              <div class="content__share">
+                                 <button
+                                    class="content__share-button js-content__share-button"
+                                    aria-label="{{ translate 'partials.shareButtons.shareWith' }}">
+                                    <svg width="32" height="32">
+                                       <use xlink:href="{{@website.assetsUrl}}/svg/svg-map.svg#share"></use>
+                                    </svg>
+                                 </button>
+                                 <div class="content__share-popup js-content__share-popup">
+                                    {{{@customSocialSharing}}}
+                                 </div>
+                              </div>
+                           {{else}}
+                              <div class="content__share">
+                                 <button
+                                    class="content__share-button js-content__share-button"
+                                    aria-label="{{ translate 'partials.shareButtons.shareWith' }}">
+                                    <svg width="32" height="32">
+                                       <use xlink:href="{{@website.assetsUrl}}/svg/svg-map.svg#share"></use>
+                                    </svg>
+                                 </button>
+                                 <div class="content__share-popup js-content__share-popup">
+                                    {{> share-buttons}}
+                                 </div>
+                              </div>
+                           {{/checkIfAll}}          
+                        {{/if}}
+                     </div>
+                  {{/checkIfAny}}
+
+                  {{#if @config.page.displayAuthorBio}}
+                     <div class="content__author">
+                        {{#author}}
+                           {{#if avatar}}
+                              <img src="{{avatar}}" {{ lazyload "lazy" }} alt="{{name}}">
+                           {{/if}}
+                           <div>
+                              <h3>
+                                 <a href="{{url}}" rel="author">
+                                    {{name}}
+                                 </a>
+                              </h3>
+                              {{{description}}}
+                           </div>
+                        {{/author}}
+                     </div>
+                  {{/if}}
+
+                  {{#if @config.page.displayChildPages}}
+                     {{#if subpages}}
+                        <div class="subpages">
+                           <div class="entry-wrapper">
+                              <h2 class="h6 subpages__title">{{ translate 'page.childPages' }}</h2>
+                              <ul class="subpages__list">
+                                 {{> subpages-list}}
+                              </ul>
+                           </div>
+                        </div>
+                     {{/if}}
+                  {{/if}}
+
+                  {{#if @config.page.displayComments}}
+                     <div class="content__comments">
+                        {{#checkIf @config.custom.commentOnClick '==' "click" }}
+                           <button class="content__comments-button" id="js-comments">{{ translate 'post.loadComments' }}</button>
+                           <div class="content__comments-inner is-hidden" id="js-comments__inner">
+                              {{{@commentsCustomCode}}}
+                           </div>
+                        {{else}}
+                           <div class="content__comments-inner">
+                              {{{@commentsCustomCode}}}
+                           </div>
+                        {{/checkIf}}
+                     </div>
+                  {{/if}}
+
+               </footer>
+            {{/checkIfAny}}
+         </article>
+      </div>
+
+   </main>
+{{/page}}
+{{> newsletter}}
+{{> footer}}

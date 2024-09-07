@@ -1,0 +1,389 @@
+{{> head}}
+{{> navbar}}
+{{#checkIf @config.custom.frontSource '==' "post" }}
+   {{#checkIf @config.custom.frontPostTemplate '==' "default" }}
+      {{> frontpage-post}}
+   {{/checkIf}}
+   {{#checkIf @config.custom.frontPostTemplate '==' "image-top" }}
+      {{> frontpage-post-image-top}}
+   {{/checkIf}}
+   {{#checkIf @config.custom.frontPostTemplate '==' "divided" }}
+      {{> frontpage-post-divided-header}}
+   {{/checkIf}}
+{{else}}
+   <main class="h-overflow">
+      {{#if @config.custom.textHero}}
+         <div class="hero section section--1">
+            <div class="wrapper hero__inner">
+               {{{@config.custom.textHeroContent}}}
+            </div>
+         </div>
+      {{/if}}
+      {{#checkIf @config.custom.hero '==' "static" }}
+         {{#if @config.custom.uploadHero}}
+            <div class="slider">             
+               <div
+                  class="slider__image {{#if @config.custom.heroImageOverlay}}slider__image--overlay{{/if}}">
+                  <img
+                     class="slider__image-img"
+                     src="{{@config.custom.uploadHero}}"
+                     {{responsiveImageAttributes @config.custom.uploadHero}}
+                     {{imageDimensions @config.custom.uploadHero}}
+                     {{ lazyload "eager" }}
+                     alt="{{@config.custom.uploadHeroAlt}}">
+               </div>              
+            </div>
+         {{/if}}
+      {{/checkIf}}
+
+      {{#checkIf @config.custom.hero '==' "slider" }}
+         <div class="slider">
+            <div class="slider__container">
+                {{#getPostsByTags (concatenate "count=" @config.custom.heroItemsAmount "&tag_as=id" "&tags=" @config.custom.heroTagIndicator "&excluded=" @config.custom.heroItemExcluded "&offset=" @config.custom.heroItemOffset "&orderby=modifiedAt" "&ordering=" @config.custom.heroItemOrdering)}} 
+                  <div>
+                     <div class="slider__item">
+                        {{#featuredImage}}
+                           {{#if url}}                          
+                              <div
+                                 class="slider__image {{#if @config.custom.heroImageOverlay}}slider__image--overlay{{/if}}">
+                                 <img
+                                    class="slider__image-img"
+                                    src="{{url}}"
+                                    {{#if @config.site.responsiveImages}}                           
+                                       {{responsiveImageAttributes 'featuredImage' srcset.post sizes.post}}
+                                    {{/if}}
+                                    {{#checkIf @index '==' 0}}
+                                       {{ lazyload "eager" }}
+                                    {{else}}
+                                       {{ lazyload "lazy" }}
+                                    {{/checkIf}}
+                                    height="{{height}}"
+                                    width="{{width}}"
+                                    alt="{{alt}}">
+                              </div>                           
+                           {{/if}}
+                        {{/featuredImage}}
+                        {{#if @config.custom.heroImageText}}
+                           <div class="wrapper slider__text">
+                              {{#checkIfAny @config.custom.heroSliderMainTag  @config.custom.heroSliderAuthor  @config.custom.heroSliderDate}}
+                                 <div class="c-card__meta">
+                                    {{#if @config.custom.heroSliderMainTag}}
+                                       {{#if mainTag}}
+                                          <a href="{{mainTag.url}}">{{ mainTag.name }}</a>
+                                       {{/if}}
+                                    {{/if}}
+                                    {{#if @config.custom.heroSliderAuthor}}
+                                       {{#author}}
+                                          <a href="{{url}}" rel="author">{{name}}</a>
+                                       {{/author}}
+                                    {{/if}}
+                                    {{#if @config.custom.heroSliderDate}}
+                                       <time datetime="{{date createdAt 'YYYY-MM-DDTHH:mm'}}">
+                                          {{#checkIf @config.custom.formatDate '!=' 'custom'}}
+                                             {{date createdAt @config.custom.formatDate}}
+                                          {{else}}
+                                             {{date createdAt @config.custom.formatDateCustom}}
+                                          {{/checkIf}}
+                                       </time>
+                                    {{/if}}
+                                 </div>
+                              {{/checkIfAny}}
+                              <h2 class="h4">
+                                 {{#checkIf @config.custom.heroImageTextLink '==' true }}
+                                    <a href="{{url}}">{{title}}</a>
+                                 {{else}}
+                                    {{title}}
+                                 {{/checkIf}}
+                              </h2>
+                           </div>
+                        {{/if}}
+                     </div>
+                  </div>
+               {{/getPostsByTags}}
+            </div>
+
+            {{#if @config.custom.heroSliderCounter}}
+               <div class="slider__counter">
+                  <span class="slider__curent-slide">0</span>
+                  /
+                  <span class="slider__total-slides">0</span>
+               </div>
+            {{/if}}
+         </div>
+      {{/checkIf}}
+
+      {{#if @config.custom.editorPicks}}
+         <div class="section--contrast section section--2 section--bigger">
+            <div class="wrapper">
+               <div class="l-cols">                  
+                   {{#getPostsByTags (concatenate "count=" @config.custom.editorPicksItemsAmount "&tag_as=id" "&tags=" @config.custom.editorPicksTagIndicator "&excluded=" @config.custom.editorPicksItemExcluded "&offset=" @config.custom.editorPicksItemOffset "&orderby=modifiedAt" "&ordering=" @config.custom.editorPicksItemOrdering)}}
+                     <article class="c-card {{#if @config.custom.feedImage}}c-card--horizontal{{/if}}">
+                        {{#if @config.custom.feedImage}}
+                           {{#featuredImage}}
+                              {{#if url}}
+                                 <a href="{{../url}}" class="c-card__image">
+                                    <img
+                                       src="{{url}}"
+                                       {{#if @config.site.responsiveImages}}                           
+                                          {{responsiveImageAttributes 'featuredImage' srcset.listing sizes.listing}}
+                                       {{/if}}
+                                       {{ lazyload "lazy" }}
+                                       height="{{height}}"
+                                       width="{{width}}"
+                                       alt="{{alt}}">
+                                 </a>                                
+                              {{/if}}
+                           {{/featuredImage}}
+                        {{/if}}
+                        <div class="c-card__body">
+                           <header>
+                              {{#checkIfAny @config.custom.feedAuthor @config.custom.feedDate}}
+                                 <div class="c-card__meta">
+                                    {{#if @config.custom.feedAuthor}}
+                                       {{#author}}
+                                          <a href="{{url}}" rel="author">{{name}}</a>
+                                       {{/author}}
+                                    {{/if}}
+                                    {{#if @config.custom.feedDate}}
+                                       <time datetime="{{date createdAt 'YYYY-MM-DDTHH:mm'}}">
+                                          {{#checkIf @config.custom.formatDate '!=' 'custom'}}
+                                             {{date createdAt @config.custom.formatDate}}
+                                          {{else}}
+                                             {{date createdAt @config.custom.formatDateCustom}}
+                                          {{/checkIf}}
+                                       </time>
+                                    {{/if}}
+                                 </div>
+                              {{/checkIfAny}}
+
+                              {{#if @config.custom.feedTitle}}
+                                 <h2 class="c-card__title">
+                                    <a href="{{url}}">{{title}}</a>
+                                 </h2>
+                              {{/if}}
+                           </header>
+                           {{#checkIfAny @config.custom.feedText @config.custom.feedReadMore}}                         
+                              <div class="c-card__excerpt">
+                                 {{#if @config.custom.feedText}}
+                                    <p>{{{excerpt }}}</p>
+                                 {{/if}}
+                                 {{#if @config.custom.feedReadMore}}
+                                    <a href="{{url}}" class="btn c-card__btn">
+                                       {{ translate 'common.readMore' }}</a>
+                                 {{/if}}
+                              </div>
+                           {{/checkIfAny}}
+                        </div>
+                     </article>
+                  {{/getPostsByTags}}
+               </div>
+            </div>
+         </div>
+      {{/if}}
+
+      {{#if @config.custom.latest}}
+         <div class="section latest {{#checkIf @config.custom.latestLayout '==' "masonry" }}latest--masonry{{/checkIf}}">
+            <div class="wrapper">
+               <div class="section__header">
+                  <h2 class="section__title">{{ translate 'common.inGalleries' }}</h2>
+                  <p>{{ translate 'common.browseExhibitions' }}</p>
+               </div>
+               <div class="l-listing 
+                           {{#checkIf @config.custom.latestLayout '==' "grid" }}
+                               l-grid l-grid--{{@config.custom.latestColumns}}
+                           {{else}}
+                               l-masonry l-masonry--{{@config.custom.latestColumns}}
+                           {{/checkIf}}">
+                  {{#checkIf @config.custom.latestSource '==' "latest" }}                    
+                     {{#each posts}}
+                        <article class="c-card">
+                           {{#if @config.custom.feedImage}}
+                              {{#featuredImage}}
+                                 {{#if url}}
+                                    <a href="{{../url}}" class="c-card__image">
+                                       <img
+                                          src="{{url}}"
+                                          {{#if @config.site.responsiveImages}}                           
+                                             {{responsiveImageAttributes 'featuredImage' srcset.listing sizes.listing}}
+                                          {{/if}}
+                                          {{ lazyload "lazy" }}
+                                          height="{{height}}"
+                                          width="{{width}}"
+                                          alt="{{alt}}">
+                                    </a>
+                                 {{/if}}
+                              {{/featuredImage}}
+                           {{/if}}
+                           {{#checkIfAny @config.custom.feedAuthor @config.custom.feedDate @config.custom.feedTitle @config.custom.feedReadMore}}
+                              <div class="c-card__body">
+                                 {{#checkIfAny @config.custom.feedAuthor @config.custom.feedDate @config.custom.feedTitle}}
+                                    <header>
+                                       {{#checkIfAny @config.custom.feedAuthor @config.custom.feedDate}}
+                                          <div class="c-card__meta">
+                                             {{#if @config.custom.feedAuthor}}
+                                                {{#author}}
+                                                   <a href="{{url}}" rel="author" class="invert">{{name}}</a>
+                                                {{/author}}
+                                             {{/if}}
+                                             {{#if @config.custom.feedDate}}
+                                                <time datetime="{{date createdAt 'YYYY-MM-DDTHH:mm'}}">
+                                                   {{#checkIf @config.custom.formatDate '!=' 'custom'}}
+                                                      {{date createdAt @config.custom.formatDate}}
+                                                   {{else}}
+                                                      {{date createdAt @config.custom.formatDateCustom}}
+                                                   {{/checkIf}}
+                                                </time>
+                                             {{/if}}
+                                          </div>
+                                       {{/checkIfAny}}
+                                       {{#if @config.custom.feedTitle}}
+                                          <h3 class="h6 c-card__title">
+                                             <a href="{{url}}">{{title}}</a>
+                                          </h3>
+                                       {{/if}}
+                                    </header>
+                                 {{/checkIfAny}}
+
+                                 {{#if @config.custom.feedReadMore}}
+                                    <a href="{{url}}" class="btn btn--clean c-card__btn">
+                                       <span>{{ translate 'common.readMore' }}</span>
+                                    </a>
+                                 {{/if}}
+                              </div>
+                           {{/checkIfAny}}
+                        </article>
+                     {{/each}}
+                  {{else}}                     
+                     {{#getPostsByTags (concatenate "count=" @config.custom.latestTagAmount "&tag_as=id" "&tags=" @config.custom.latestTagIndicator "&excluded=" @config.custom.latestItemExcluded "&offset=" @config.custom.latestItemOffset "&orderby=modifiedAt" "&ordering=" @config.custom.latestItemOrdering)}}
+                        <article class="c-card">
+                           {{#if @config.custom.feedImage}}
+                              {{#featuredImage}}
+                                 {{#if url}}
+                                    <a href="{{../url}}" class="c-card__image">
+                                       <img
+                                          src="{{url}}"
+                                          {{#if @config.site.responsiveImages}}                           
+                                             {{responsiveImageAttributes 'featuredImage' srcset.listing sizes.listing}}
+                                          {{/if}}
+                                          {{ lazyload "lazy" }}
+                                          height="{{height}}"
+                                          width="{{width}}"
+                                          alt="{{alt}}">
+                                    </a>
+                                 {{/if}}
+                              {{/featuredImage}}
+                           {{/if}}
+                           {{#checkIfAny @config.custom.feedAuthor @config.custom.feedDate @config.custom.feedTitle @config.custom.feedReadMore}}
+                              <div class="c-card__body">
+                                 {{#checkIfAny @config.custom.feedAuthor @config.custom.feedDate @config.custom.feedTitle}}
+                                    <header>
+                                       {{#checkIfAny @config.custom.feedAuthor @config.custom.feedDate}}
+                                          <div class="c-card__meta">
+                                             {{#if @config.custom.feedAuthor}}
+                                                {{#author}}
+                                                   <a href="{{url}}" rel="author" class="invert">{{name}}</a>
+                                                {{/author}}
+                                             {{/if}}
+                                             {{#if @config.custom.feedDate}}
+                                                <time datetime="{{date createdAt 'YYYY-MM-DDTHH:mm'}}">
+                                                   {{#checkIf @config.custom.formatDate '!=' 'custom'}}
+                                                      {{date createdAt @config.custom.formatDate}}
+                                                   {{else}}
+                                                      {{date createdAt @config.custom.formatDateCustom}}
+                                                   {{/checkIf}}
+                                                </time>
+                                             {{/if}}
+                                          </div>
+                                       {{/checkIfAny}}
+                                       {{#if @config.custom.feedTitle}}
+                                          <h3 class="h6 c-card__title">
+                                             <a href="{{url}}">{{title}}</a>
+                                          </h3>
+                                       {{/if}}
+                                    </header>
+                                 {{/checkIfAny}}
+
+                                 {{#if @config.custom.feedReadMore}}
+                                    <a href="{{url}}" class="btn btn--clean c-card__btn">
+                                       <span>{{ translate 'common.readMore' }}</span>
+                                    </a>
+                                 {{/if}}
+                              </div>
+                           {{/checkIfAny}}
+                        </article>
+                     {{/getPostsByTags}}
+                  {{/checkIf}}
+               </div>
+            </div>
+         </div>
+      {{/if}}
+
+      {{#if @config.custom.galleries}}
+         <div class="section galleries">
+            <div class="wrapper">
+               <div class="section__header section__header--center section__header--bigger">
+                  {{{@config.custom.galleriesIntro}}}
+               </div>
+               <div class="l-gallery">                     
+                   {{#getPostsByTags (concatenate "count=3&tag_as=id" "&tags=" @config.custom.galleriesTagIndicator "&excluded=" @config.custom.galleriesItemExcluded "&offset=" @config.custom.galleriesItemOffset "&orderby=modifiedAt" "&ordering=" @config.custom.galleriesItemOrdering)}}
+                     <article class="c-card l-gallery__item">
+                        <a href="{{url}}" class="c-card__image">
+                           {{#featuredImage}}
+                              {{#if url}}
+                                 <img
+                                    src="{{url}}"
+                                    {{#if @config.site.responsiveImages}}                           
+                                       {{responsiveImageAttributes 'featuredImage' srcset.listing sizes.listing}}
+                                    {{/if}}
+                                    {{ lazyload "lazy" }}
+                                    height="{{height}}"
+                                    width="{{width}}"
+                                    alt="{{alt}}">
+                              {{/if}}
+                           {{/featuredImage}}
+                        </a>
+                        <div class="c-card__body">
+                           <header>
+                              {{#checkIfAny @config.custom.feedAuthor @config.custom.feedDate}}
+                                 <div class="c-card__meta">
+                                    {{#if @config.custom.feedAuthor}}
+                                       {{#author}}
+                                          <a href="{{url}}" rel="author" class="invert">{{name}}</a>
+                                       {{/author}}
+                                    {{/if}}
+                                    {{#if @config.custom.feedDate}}
+                                       <time datetime="{{date createdAt 'YYYY-MM-DDTHH:mm'}}">
+                                          {{#checkIf @config.custom.formatDate '!=' 'custom'}}
+                                             {{date createdAt @config.custom.formatDate}}
+                                          {{else}}
+                                             {{date createdAt @config.custom.formatDateCustom}}
+                                          {{/checkIf}}
+                                       </time>
+                                    {{/if}}
+                                 </div>
+                              {{/checkIfAny}}
+                              <h2 class="h3 c-card__title">
+                                 <a href="{{url}}">{{title}}</a>
+                              </h2>
+                           </header>
+                        </div>
+                     </article>
+                  {{/getPostsByTags}}
+                  <div class="l-gallery__more">
+                     <strong class="h6">{{ translate 'common.discoverMoreGalleries' }}</strong>
+                     {{#getTag @config.custom.galleriesTagIndicator}}
+                        <a href="{{url}}" aria-label="{{ translate 'common.discoverMoreGalleries' }}">
+                           <svg width="38" height="99">
+                              <use xlink:href="{{@website.assetsUrl}}/svg/svg-map.svg#arrow-more"/>
+                           </svg>
+                        </a>
+                     {{/getTag}}
+                  </div>
+               </div>
+            </div>
+         </div>
+      {{/if}}       
+   </main>
+{{/checkIf}}
+{{> newsletter}}
+{{> footer}}

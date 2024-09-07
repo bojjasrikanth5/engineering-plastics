@@ -1,0 +1,265 @@
+<footer class="section section--3 footer">
+   <div class="footer__top">
+      <div class="wrapper footer__top__cols">
+         <div>
+            <a class="logo footer__logo" href="{{@website.url}}">
+               {{#if @website.logo}}
+                  <img src="{{@website.logo}}" alt="{{@website.name}}" width="{{@website.logoSize.width}}" height="{{@website.logoSize.height}}">
+               {{else}}
+                  {{@website.name}}
+               {{/if}}
+            </a>
+         </div>
+         <div>
+            <h3>{{ translate 'partials.footer.about' }}</h3>
+            {{#if menus.footerMenu}}
+               <ul class="footer__nav">
+                  {{> simple-menu menus.footerMenu}}
+               </ul>
+            {{/if}}
+         </div>
+         <div>
+            <h3>{{ translate 'partials.footer.contact' }}</h3>
+            <p>{{{@config.custom.contact}}}</p>
+         </div>
+         <div>
+            <h3>{{ translate 'partials.footer.openHours' }}</h3>
+            <p>{{{@config.custom.openHours}}}</p>
+         </div>
+      </div>
+   </div>
+
+   <div class="footer__bottom">
+      <div class="wrapper footer__bottom__cols">
+         <div class="footer__copy">
+            {{{@config.custom.copyrightText}}}
+         </div>
+
+         <div class="footer__social">
+            {{#if @config.custom.socialFacebook}}
+               <a
+                  href="{{@config.custom.socialFacebook}}"
+                  aria-label="Facebook"
+                  target="_blank">
+                  <svg>
+                     <use xlink:href="{{@website.assetsUrl}}/svg/svg-map.svg#facebook"/>
+                  </svg>
+               </a>
+            {{/if}}
+            {{#if @config.custom.socialTwitter}}
+               <a href="{{@config.custom.socialTwitter}}" aria-label="Twitter" target="_blank">
+                  <svg>
+                     <use xlink:href="{{@website.assetsUrl}}/svg/svg-map.svg#twitter"/>
+                  </svg>
+               </a>
+            {{/if}}
+            {{#if @config.custom.socialInstagram}}
+               <a
+                  href="{{@config.custom.socialInstagram}}"
+                  aria-label="Instagram"
+                  target="_blank">
+                  <svg>
+                     <use xlink:href="{{@website.assetsUrl}}/svg/svg-map.svg#instagram"/>
+                  </svg>
+               </a>
+            {{/if}}
+            {{#if @config.custom.socialLinkedin}}
+               <a
+                  href="{{@config.custom.socialLinkedin}}"
+                  aria-label="LinkedIn"
+                  target="_blank">
+                  <svg>
+                     <use xlink:href="{{@website.assetsUrl}}/svg/svg-map.svg#linkedin"/>
+                  </svg>
+               </a>
+            {{/if}}
+            {{#if @config.custom.socialVimeo}}
+               <a href="{{@config.custom.socialVimeo}}" aria-label="Vimeo" target="_blank">
+                  <svg>
+                     <use xlink:href="{{@website.assetsUrl}}/svg/svg-map.svg#vimeo"/>
+                  </svg>
+               </a>
+            {{/if}}
+            {{#if @config.custom.socialPinterest}}
+               <a
+                  href="{{@config.custom.socialPinterest}}"
+                  aria-label="Pinterest"
+                  target="_blank">
+                  <svg>
+                     <use xlink:href="{{@website.assetsUrl}}/svg/svg-map.svg#pinterest"/>
+                  </svg>
+               </a>
+            {{/if}}
+            {{#if @config.custom.socialYoutube}}
+               <a href="{{@config.custom.socialYoutube}}" aria-label="Youtube" target="_blank">
+                  <svg>
+                     <use xlink:href="{{@website.assetsUrl}}/svg/svg-map.svg#youtube"/>
+                  </svg>
+               </a>
+            {{/if}}
+         </div>
+
+      </div>
+
+   </div>
+
+   {{#if @config.custom.backToTopButton}}
+      <button onclick="backToTopFunction()" id="backToTop" class="footer__bttop" aria-label="{{ translate 'partials.footer.backToTop' }}" title="{{ translate 'partials.footer.backToTop' }}">
+         <svg>
+               <use xlink:href="{{@website.assetsUrl}}/svg/svg-map.svg#toparrow"/>
+         </svg>
+      </button>
+   {{/if}}
+   
+</footer>
+<script>
+   window.publiiThemeMenuConfig = {    
+        mobileMenuMode: '{{@config.custom.mobilemenu}}',
+        animationSpeed: 300,
+        submenuWidth: {{#checkIf @config.custom.submenu '==' "auto" }}'auto'{{else}}{{@config.custom.submenuWidth}}{{/checkIf}},
+        doubleClickTime: 500,
+        mobileMenuExpandableSubmenus: {{@config.custom.mobilemenuExpandableSubmenus}}, 
+        relatedContainerForOverlayMenuSelector: '.navbar',
+   };
+</script>
+
+<script defer src="{{js "scripts.js"}}"></script>
+
+{{#checkIf @config.custom.hero '==' "slider" }}
+   {{#checkIf @config.custom.frontSource '==' "default" }}                 
+       {{#is "index"}}
+           <script defer src="{{js "tiny-slider.min.js"}}"></script>        
+           <script>
+               window.onload = function() {
+                   var slider = tns({
+                       container: ".slider__container",                                    
+                       mode: '{{@config.custom.heroSliderMode}}',
+                       axis: '{{@config.custom.heroSliderAxis}}',
+                       {{#checkIf @config.custom.heroSliderColumns '==' "3" }}
+                          responsive: {
+                             600: {              
+                                items: 2,
+                                gutter: {{#checkIf @config.custom.heroSliderMode '==' "carousel" }} 24 {{else}} 0 {{/checkIf}}
+                             },      
+                             1200: {
+                                items: 3,
+                                gutter: {{#checkIf @config.custom.heroSliderMode '==' "carousel" }} 32 {{else}} 0 {{/checkIf}}
+                             }
+                          }, 
+                       {{/checkIf}}  
+                       {{#checkIf @config.custom.heroSliderColumns '==' "2" }}
+                          responsive: {
+                             600: {              
+                                items: 2,
+                                gutter: {{#checkIf @config.custom.heroSliderMode '==' "carousel" }} 24 {{else}} 0 {{/checkIf}}
+                             },      
+                             1200: {                               
+                                gutter: {{#checkIf @config.custom.heroSliderMode '==' "carousel" }} 32 {{else}} 0 {{/checkIf}}
+                             }
+                          }, 
+                       {{/checkIf}}
+                       {{#checkIf @config.custom.heroSliderColumns '==' "1" }}
+                           items: 1,
+                           gutter: {{#checkIf @config.custom.heroSliderMode '==' "carousel" }} 32 {{else}} 0 {{/checkIf}},
+                       {{/checkIf}}
+                       loop: {{@config.custom.heroSliderLoop}},
+                       mouseDrag: true,
+                       slideBy: "page",
+                       swipeAngle: 15,
+                       speed: {{@config.custom.heroSliderSpeed}},
+                       nav: false,
+                       controls: {{@config.custom.heroSliderControls}},
+                       controlsPosition: "bottom",
+                       controlsText: ["", ""],
+                       arrowKeys: true,
+                       autoplay: {{@config.custom.heroSliderAutoplay}},
+                       autoplayButtonOutput: false,
+                       autoplayTimeout: {{@config.custom.heroSliderAutoplayTimeout}},
+                       rewind: false,
+                       pagination: false,
+                       preventActionWhenRunning: {{@config.custom.heroSliderPreventActionWhenRunning}}
+                   });
+                   
+                   {{#if @config.custom.heroSliderCounter}}
+                       var info = slider.getInfo(),
+                           current = document.querySelector('.slider__curent-slide'),
+                           total = document.querySelector('.slider__total-slides');
+
+                       current.textContent = info.index;
+                       total.textContent = info.slideCount;
+
+                       slider.events.on('transitionEnd', function(info) {
+                           current.textContent = slider.getInfo().displayIndex;
+                       });                   
+                   {{/if}}
+               }
+           </script>
+       {{/is}}
+   {{/checkIf}}
+{{/checkIf}}
+
+{{#checkIf @config.custom.latestLayout '==' "masonry" }}
+  {{#is "index"}}
+      <script src="{{js "masonry.pkgd.min.js"}}"></script>
+      <script>
+         var grid = document.querySelector('.l-masonry');
+         var msnry = new Masonry( grid, {
+            // options...
+            itemSelector: '.c-card',
+            columnWidth: '.c-card'
+         });
+      </script>
+   {{/is}}
+{{/checkIf}}
+
+{{#checkIf @config.custom.pagelatestLayout '==' "masonry" }}
+  {{#is "author,tag"}}
+      <script src="{{js "masonry.pkgd.min.js"}}"></script>
+      <script>
+         var grid = document.querySelector('.l-masonry');
+         var msnry = new Masonry( grid, {
+            // options...
+            itemSelector: '.c-card',
+            columnWidth: '.c-card'
+         });
+      </script>
+   {{/is}}
+{{/checkIf}}
+
+{{#if @config.site.mediaLazyLoad}}
+   <script>        
+      var images = document.querySelectorAll('img[loading]');
+
+      for (var i = 0; i < images.length; i++) {
+         if (images[i].complete) {
+               images[i].classList.add('is-loaded');
+         } else {
+               images[i].addEventListener('load', function () {
+                  this.classList.add('is-loaded');
+               }, false);
+         }
+      }
+   </script>
+{{/if}}
+
+{{#checkIfAny post.hasGallery page.hasGallery}}
+   {{> photoswipe}}
+{{/checkIfAny}}
+
+{{#checkIf @config.custom.frontSource '==' "post"}}
+   {{#checkIf @config.custom.frontGallery '==' true}}
+      {{#is "index"}}
+          {{> photoswipe}}
+      {{/is}}
+   {{/checkIf}}
+{{/checkIf}}
+
+{{#if @renderer.previewMode}}
+   <script src="{{js "svg-map.js"}}"></script>
+   <script src="{{js "svg-fix.js"}}"></script>
+{{/if}}
+
+{{{@footerCustomCode}}}
+{{{ publiiFooter }}}
+</body>
+</html>
