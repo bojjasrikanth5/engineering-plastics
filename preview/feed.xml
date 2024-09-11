@@ -3,7 +3,7 @@
     <title>Engineering Plastics</title>
     <link href="file:///C:\Users\srikanth\OneDrive\Documents\Publii\sites\engineering-plastics\preview/feed.xml" rel="self" />
     <link href="file:///C:\Users\srikanth\OneDrive\Documents\Publii\sites\engineering-plastics\preview" />
-    <updated>2024-09-10T16:32:43+05:30</updated>
+    <updated>2024-09-11T13:10:20+05:30</updated>
     <author>
         <name>Aamina Raheen</name>
     </author>
@@ -25,7 +25,7 @@
             </summary>
         <content type="html">
             <![CDATA[
-                <figure class="post__image"><img loading="lazy"  src="file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/24/staymetalsafe-3.jpg" alt="" width="750" height="563" sizes="(max-width: 1200px) 100vw, 1200px" srcset="file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/24/responsive/staymetalsafe-3-xs.jpg 300w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/24/responsive/staymetalsafe-3-sm.jpg 480w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/24/responsive/staymetalsafe-3-md.jpg 768w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/24/responsive/staymetalsafe-3-xl.jpg 1200w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/24/responsive/staymetalsafe-3-xxl.jpg 1600w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/24/responsive/staymetalsafe-3-xxxl.jpg 1920w"></figure>
+                <figure class="featured-image"><img loading="lazy"  src="file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/24/staymetalsafe-3.jpg" alt="" width="750" height="563" sizes="(max-width: 1200px) 100vw, 1200px" srcset="file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/24/responsive/staymetalsafe-3-xs.jpg 300w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/24/responsive/staymetalsafe-3-sm.jpg 480w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/24/responsive/staymetalsafe-3-md.jpg 768w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/24/responsive/staymetalsafe-3-xl.jpg 1200w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/24/responsive/staymetalsafe-3-xxl.jpg 1600w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/24/responsive/staymetalsafe-3-xxxl.jpg 1920w"></figure>
 <div id="block-fdc501bd570fc2d2462c" class="sqs-block html-block sqs-block-html" data-block-type="2">
 <div class="sqs-block-content">
 <div class="sqs-html-content">
@@ -35,7 +35,7 @@
 </div>
 </div>
 </div>
-srcset="https://demo.getpublii.eu/themes/artgallery/brown/media/posts/17/responsive/nick-cozier-1nuIp0OAod4-unsplash-xs.jpg 300w,
+<p>srcset="https://demo.getpublii.eu/themes/artgallery/brown/media/posts/17/responsive/nick-cozier-1nuIp0OAod4-unsplash-xs.jpg 300w,</p>
 <div id="block-yui_3_17_2_1_1564133961946_61342" class="sqs-block image-block sqs-block-image sqs-text-ready" data-block-type="5">
 <div id="yui_3_17_2_1_1725605744677_4918" class="sqs-block-content">
 <div id="yui_3_17_2_1_1725605744677_4917" class="
@@ -344,7 +344,7 @@ srcset="https://demo.getpublii.eu/themes/artgallery/brown/media/posts/17/respons
             </summary>
         <content type="html">
             <![CDATA[
-                <figure class="post__image"><img loading="lazy"  src="file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/23/partdesign-2.jpg" alt="" width="800" height="446" sizes="(max-width: 1200px) 100vw, 1200px" srcset="file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/23/responsive/partdesign-2-xs.jpg 300w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/23/responsive/partdesign-2-sm.jpg 480w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/23/responsive/partdesign-2-md.jpg 768w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/23/responsive/partdesign-2-xl.jpg 1200w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/23/responsive/partdesign-2-xxl.jpg 1600w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/23/responsive/partdesign-2-xxxl.jpg 1920w"></figure>
+                <figure class="featured-image1"><img loading="lazy"  src="file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/23/partdesign-2.jpg" alt="" width="800" height="446" sizes="(max-width: 1200px) 100vw, 1200px" srcset="file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/23/responsive/partdesign-2-xs.jpg 300w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/23/responsive/partdesign-2-sm.jpg 480w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/23/responsive/partdesign-2-md.jpg 768w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/23/responsive/partdesign-2-xl.jpg 1200w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/23/responsive/partdesign-2-xxl.jpg 1600w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/23/responsive/partdesign-2-xxxl.jpg 1920w"></figure>
 <p>The Importance Of Weight Reduction</p>
 <h1 class="BlogItem-title" data-content-field="title">The Importance Of Weight Reduction</h1>
 <div id="item-5d3ad6a09dbf6000011b61f9" class="sqs-layout sqs-grid-12 columns-12" data-layout-label="Post Body" data-type="item" data-updated-on="1564137546567">
@@ -466,7 +466,7 @@ srcset="https://demo.getpublii.eu/themes/artgallery/brown/media/posts/17/respons
             </summary>
         <content type="html">
             <![CDATA[
-                <figure class="post__image"><img loading="lazy"  src="file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/22/modernfactory1.jpg" alt="" width="800" height="464" sizes="(max-width: 1200px) 100vw, 1200px" srcset="file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/22/responsive/modernfactory1-xs.jpg 300w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/22/responsive/modernfactory1-sm.jpg 480w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/22/responsive/modernfactory1-md.jpg 768w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/22/responsive/modernfactory1-xl.jpg 1200w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/22/responsive/modernfactory1-xxl.jpg 1600w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/22/responsive/modernfactory1-xxxl.jpg 1920w"></figure>
+                <figure class="featured-image2"><img loading="lazy"  src="file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/22/modernfactory1.jpg" alt="" width="800" height="464" sizes="(max-width: 1200px) 100vw, 1200px" srcset="file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/22/responsive/modernfactory1-xs.jpg 300w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/22/responsive/modernfactory1-sm.jpg 480w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/22/responsive/modernfactory1-md.jpg 768w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/22/responsive/modernfactory1-xl.jpg 1200w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/22/responsive/modernfactory1-xxl.jpg 1600w ,file:///C:/Users/srikanth/OneDrive/Documents/Publii/sites/engineering-plastics/preview/media/posts/22/responsive/modernfactory1-xxxl.jpg 1920w"></figure>
 <p>Four Factors To Consider BEFORE Choosing Outsourced / Offshore Manufacturing</p>
 <div id="block-a786548fbd84aa99b8fd" class="sqs-block html-block sqs-block-html" data-block-type="2">
 <div class="sqs-block-content">
