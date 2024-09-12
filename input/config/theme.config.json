@@ -72,7 +72,7 @@
         "galleriesItemOrdering": "static",
         "feedImage": true,
         "feedTitle": true,
-        "feedText": true,
+        "feedText": false,
         "feedAuthor": false,
         "mainTag": true,
         "feedDate": true,

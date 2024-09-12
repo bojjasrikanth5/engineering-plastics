@@ -104,14 +104,10 @@ font-size: 50px;
 border-radius: 5px; /* Rounded corners */
 }
 .button-container00 {
-text-align:center;
-left:50%;
-right:50%;
-Border:none;
-padding: 10px 20px;
-border-radius: 5px;
-background-color:orange;
+    text-align: center;
+    background-color: #ff6347;
 }
+
 .home_container {
 position: relative;
 }
@@ -511,4 +507,31 @@ background-color: Transparent;
 padding: 10px 20px;
 font-size: 40px;
 border-radius: 5px; /* Rounded corners */
+}
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.image-item {
+    text-align: center;
+}
+
+.image-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.image-item img:hover {
+    transform: scale(1.05);
+}
+
+.image-item p {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
 }
